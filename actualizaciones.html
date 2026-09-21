@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Actualizaciones · Path to the Sanctuary</title>
+  <meta name="description" content="Historial de actualizaciones de Path to the Sanctuary: todo lo que ha cambiado en la senda, versión a versión.">
+  <meta name="theme-color" content="#160d1c">
+  <link rel="icon" href="assets/img/icono.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@800&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/comun.css">
+  <link rel="stylesheet" href="css/actualizaciones.css">
+</head>
+<body>
+
+  <div class="fondo fondo--hondo" aria-hidden="true">
+    <video class="fondo__video" src="assets/video/fondo.mp4" autoplay muted loop playsinline preload="auto"></video>
+    <div class="fondo__velo"></div>
+    <div class="fondo__vineta"></div>
+    <canvas class="fondo__petalos"></canvas>
+  </div>
+
+  <header class="barra">
+    <a class="boton boton--callado boton--chico" href="index.html"><span>VOLVER</span></a>
+  </header>
+
+  <button class="mando mando--pausa" type="button" data-pausa-fondo aria-label="Pausar el vídeo de fondo"></button>
+
+  <main class="bitacora">
+    <div class="rotulo bitacora__rotulo">
+      <p class="rotulo__kanji aparece" lang="ja"><span>更新の記録</span></p>
+      <h1 class="aparece aparece--2"><span class="titular">HISTORIAL</span></h1>
+      <p class="lema aparece aparece--3">Todo lo que ha cambiado en la senda, de la última versión a la primera.</p>
+    </div>
+
+    <div id="estado" aria-live="polite"></div>
+    <ol class="linea" id="lista"></ol>
+
+    <div class="bitacora__pie">
+      <a class="boton boton--chico" href="index.html"><span>VOLVER AL INICIO</span></a>
+    </div>
+  </main>
+
+  <div class="ficha" id="ficha" role="dialog" aria-modal="true" aria-labelledby="ficha-titulo" hidden>
+    <div class="ficha__marco">
+      <button class="mando ficha__cerrar" type="button" data-cerrar aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <article class="tablilla ficha__tablilla">
+        <div class="ficha__texto"></div>
+        <div class="ficha__fotos"></div>
+      </article>
+    </div>
+  </div>
+
+  <div class="lamina" id="lamina" role="dialog" aria-modal="true" aria-label="Imagen en grande" hidden>
+    <button class="mando lamina__cerrar" type="button" data-cerrar aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <button class="mando lamina__paso lamina__paso--antes" type="button" data-antes aria-label="Imagen anterior">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <figure>
+      <img alt="">
+      <figcaption></figcaption>
+    </figure>
+    <button class="mando lamina__paso lamina__paso--despues" type="button" data-despues aria-label="Imagen siguiente">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/fondo.js"></script>
+  <script src="js/actualizaciones.js"></script>
+</body>
+</html>

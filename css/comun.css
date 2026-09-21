@@ -1,0 +1,366 @@
+/* comun.css - estilos compartidos por todas las páginas */
+
+:root {
+  --noche: #160d1c;
+  --velo: 12, 6, 14; /* en rgb, para usarlo con transparencia */
+  --panel: rgba(48, 24, 40, .92);
+
+  --oro: #d9a74f;
+  --oro-vivo: #f2c462;
+  --oro-palido: #ffe7a6;
+  --oro-rotulo: #ffc65c;
+  --ceniza: #fbeee2;
+  --melocoton: #ffd6b5;
+  --blanco: #fffaf4;
+  --crema: #ffe8b8;
+  --bermellon: #8a2218;
+  --avivado: #ec6a2c;
+  --sol: #f4593a;
+  --titular: #fffbf2;
+  --titular-sombra: #c1301f;
+
+  --cielo-1: #1e1733;
+  --cielo-2: #40204c;
+  --cielo-3: #8b2c4e;
+  --cielo-4: #cf4a34;
+  --cielo-5: #ff8f3d;
+
+  --mincho: "Shippori Mincho B1", "Yu Mincho", serif;
+  --gothic: "Zen Kaku Gothic New", "Yu Gothic", system-ui, sans-serif;
+
+  --corte: 10px;
+  --ancho-botones: 396px;
+
+  --cursor: url("../assets/img/cursor.svg") 1 1, auto;
+  --cursor-mano: url("../assets/img/cursor-mano.svg") 6 1, pointer;
+}
+
+/* ---------- Base ---------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { background: var(--noche); color-scheme: dark; cursor: var(--cursor); }
+
+a, button { cursor: var(--cursor-mano); }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+  color: var(--ceniza);
+  font-family: var(--gothic);
+  font-weight: 500;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img, video { display: block; max-width: 100%; }
+
+[hidden] { display: none !important; }
+
+a { color: inherit; }
+
+:focus-visible { outline: 2px solid var(--oro-vivo); outline-offset: 4px; }
+
+/* ---------- Fondo: vídeo, velo, viñeta y pétalos ---------- */
+
+.fondo {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: linear-gradient(to bottom, var(--cielo-1) 0%, var(--cielo-2) 34%,
+    var(--cielo-3) 62%, var(--cielo-4) 84%, var(--cielo-5) 100%);
+}
+
+.fondo__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  /* ampliado para dejar fuera del cuadro el HUD de la partida */
+  transform: scale(1.24);
+  transition: opacity 1.2s ease;
+}
+
+.fondo__video.listo { opacity: 1; }
+
+.fondo__velo {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 24%, rgba(244, 89, 58, .28), rgba(244, 89, 58, 0) 70%),
+    linear-gradient(to bottom, rgba(var(--velo), .8) 0%, rgba(var(--velo), .58) 38%,
+      rgba(var(--velo), .62) 70%, rgba(var(--velo), .92) 100%);
+}
+
+.fondo__velo::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 38%;
+  background: linear-gradient(to top, rgba(207, 74, 52, .28), rgba(207, 74, 52, 0));
+  mix-blend-mode: screen;
+}
+
+/* más oscuro, para páginas con mucho texto */
+.fondo--hondo .fondo__velo {
+  background:
+    radial-gradient(ellipse 60% 35% at 50% 0%, rgba(244, 89, 58, .22), rgba(244, 89, 58, 0) 70%),
+    linear-gradient(to bottom, rgba(var(--velo), .86), rgba(var(--velo), .8) 50%, rgba(var(--velo), .93));
+}
+
+.fondo__vineta {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 55%, rgba(var(--velo), .75) 100%);
+}
+
+.fondo__petalos {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ---------- Mando: botón redondo (pausa, cerrar) ---------- */
+
+.mando {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid rgba(217, 167, 79, .6);
+  border-radius: 50%;
+  background: rgba(43, 20, 39, .7);
+  color: var(--ceniza);
+  transition: background .12s, border-color .12s, transform .12s;
+}
+
+.mando:hover { background: rgba(224, 80, 46, .84); border-color: var(--melocoton); transform: scale(1.06); }
+
+.mando svg { width: 18px; height: 18px; }
+
+.mando--pausa {
+  position: fixed;
+  right: clamp(16px, 3vw, 32px);
+  bottom: 33px;
+  z-index: 20;
+}
+
+/* ---------- Rótulo: kanji, titular y lema ---------- */
+
+.rotulo {
+  text-align: center;
+  user-select: none;
+}
+
+.rotulo h1 { margin: 0; font-weight: inherit; }
+.rotulo h1 .titular { display: block; }
+
+.rotulo__kanji {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin: 0 0 12px;
+  font-family: var(--mincho);
+  font-weight: 800;
+  font-size: clamp(16px, 2.2vw, 22px);
+  letter-spacing: .42em;
+  color: var(--oro-rotulo);
+}
+
+/* compensa el espaciado de la última letra para centrar el texto */
+.rotulo__kanji span { margin-right: -.42em; }
+
+.rotulo__kanji::before,
+.rotulo__kanji::after {
+  content: "";
+  width: clamp(40px, 7vw, 86px);
+  height: 2px;
+}
+
+.rotulo__kanji::before { background: linear-gradient(to right, rgba(255, 198, 92, 0), var(--oro-rotulo)); }
+.rotulo__kanji::after { background: linear-gradient(to right, var(--oro-rotulo), rgba(255, 198, 92, 0)); }
+
+.titular {
+  margin: 0;
+  font-family: var(--mincho);
+  font-weight: 800;
+  font-size: var(--tam-titular, clamp(36px, 11.5vw, 112px));
+  line-height: .98;
+  letter-spacing: .06em;
+  margin-right: -.06em;
+  color: var(--titular);
+  text-shadow:
+    .07em .085em 0 var(--titular-sombra),
+    0 0 .2em rgba(244, 89, 58, .38),
+    0 0 .38em rgba(244, 89, 58, .24),
+    0 0 .6em rgba(244, 89, 58, .16);
+}
+
+.lema {
+  margin: 22px auto 0;
+  max-width: 38em;
+  font-size: 15px;
+  letter-spacing: .16em;
+  color: rgba(251, 238, 226, .9);
+  text-shadow: 0 2px 6px rgba(var(--velo), .8);
+}
+
+/* ---------- Botón: laca con filete y dos esquinas en chaflán ---------- */
+
+.boton {
+  --b: 2px;
+  --fondo: rgba(43, 20, 39, .7);
+  --filete: var(--oro);
+  --letra: var(--ceniza);
+  --brillo: rgba(244, 89, 58, .55);
+
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 62px;
+  padding: 0 20px;
+  border: 0;
+  background: none;
+  font-family: var(--gothic);
+  font-weight: 900;
+  font-size: 20px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--letra);
+  transition: transform .12s ease, color .12s ease, filter .12s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.boton > span { position: relative; z-index: 2; margin-right: -.3em; white-space: nowrap; }
+
+.boton svg { position: relative; z-index: 2; width: 1.05em; height: 1.05em; margin-right: .7em; flex: none; }
+
+/* el fondo */
+.boton::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--fondo);
+  clip-path: polygon(var(--corte) 0, 100% 0, 100% calc(100% - var(--corte)),
+    calc(100% - var(--corte)) 100%, 0 100%, 0 var(--corte));
+  transition: background .12s ease;
+}
+
+/* el filete: un anillo con la misma silueta */
+.boton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--filete);
+  clip-path: polygon(evenodd,
+    var(--corte) 0, 100% 0, 100% calc(100% - var(--corte)), calc(100% - var(--corte)) 100%,
+    0 100%, 0 var(--corte), var(--corte) 0,
+    calc(var(--corte) + var(--b) * .41) var(--b), var(--b) calc(var(--corte) + var(--b) * .41),
+    var(--b) calc(100% - var(--b)), calc(100% - var(--corte) - var(--b) * .41) calc(100% - var(--b)),
+    calc(100% - var(--b)) calc(100% - var(--corte) - var(--b) * .41), calc(100% - var(--b)) var(--b),
+    calc(var(--corte) + var(--b) * .41) var(--b));
+  transition: background .12s ease;
+}
+
+.boton:hover,
+.boton:focus-visible {
+  --fondo: rgba(224, 80, 46, .84);
+  --filete: var(--melocoton);
+  --letra: var(--blanco);
+  transform: scale(1.035);
+  filter: drop-shadow(0 0 5px var(--brillo));
+  outline: none;
+}
+
+.boton:active { transform: scale(1.02); }
+
+.boton--principal {
+  --fondo: rgba(138, 34, 24, .78);
+  --filete: var(--oro-vivo);
+  --letra: var(--crema);
+  --brillo: rgba(255, 199, 92, .6);
+  height: 72px;
+  font-size: 24px;
+}
+
+.boton--principal:hover,
+.boton--principal:focus-visible {
+  --fondo: rgba(236, 106, 44, .88);
+  --filete: var(--oro-palido);
+  --letra: var(--blanco);
+}
+
+/* segundo filete por dentro del principal */
+.boton__doble {
+  position: absolute;
+  inset: 6px;
+  z-index: 1;
+  background: var(--filete);
+  opacity: .55;
+  --c: calc(var(--corte) - 2.5px);
+  clip-path: polygon(evenodd,
+    var(--c) 0, 100% 0, 100% calc(100% - var(--c)), calc(100% - var(--c)) 100%,
+    0 100%, 0 var(--c), var(--c) 0,
+    calc(var(--c) + .41px) 1px, 1px calc(var(--c) + .41px), 1px calc(100% - 1px),
+    calc(100% - var(--c) - .41px) calc(100% - 1px), calc(100% - 1px) calc(100% - var(--c) - .41px),
+    calc(100% - 1px) 1px, calc(var(--c) + .41px) 1px);
+  transition: background .12s ease;
+  pointer-events: none;
+}
+
+.boton--callado {
+  --fondo: rgba(31, 15, 28, .75);
+  --filete: #98753a;
+  --letra: var(--oro);
+}
+
+.boton--chico {
+  height: 48px;
+  font-size: 15px;
+  width: auto;
+  padding: 0 26px;
+}
+
+/* ---------- Animación de entrada ---------- */
+
+.aparece {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: aparecer .9s cubic-bezier(.2, .7, .2, 1) forwards;
+}
+
+.aparece--2 { animation-delay: .18s; }
+.aparece--3 { animation-delay: .36s; }
+.aparece--4 { animation-delay: .6s; }
+
+@keyframes aparecer { to { opacity: 1; transform: none; } }
+
+/* ---------- Móvil y movimiento reducido ---------- */
+
+@media (max-width: 640px) {
+  .boton { font-size: 16px; height: 56px; letter-spacing: .24em; }
+  .boton > span { margin-right: -.24em; }
+  .boton--principal { font-size: 19px; height: 64px; }
+  .boton--chico { font-size: 13px; height: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .aparece { opacity: 1; transform: none; }
+}
