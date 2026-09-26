@@ -9,9 +9,7 @@
   <meta property="og:title" content="Path to the Sanctuary">
   <meta property="og:description" content="Diez comarcas, cien sendas y un trono que alcanzar.">
   <link rel="icon" href="assets/img/icono.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@800&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/fuente.css">
   <link rel="stylesheet" href="css/comun.css">
   <link rel="stylesheet" href="css/index.css">
 </head>
@@ -46,27 +44,18 @@
           <span>VER EN STEAM</span>
         </a>
         <a class="boton" href="actualizaciones.html"><span>ACTUALIZACIONES</span></a>
-        <button class="boton boton--callado" type="button" data-abrir-trailer>
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg>
-          <span>VER TRÁILER</span>
-        </button>
+        <a class="boton boton--callado" href="tablon.html">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 4h18v12H10l-5 4.5V16H3z"/></svg>
+          <span>IDEAS Y ERRORES</span>
+        </a>
       </nav>
     </div>
 
     <footer class="portada__pie">
       <span class="sello">ALFA</span>
-      <p>Todo dibujado a código sin assets externos</p>
+      <p>Todo dibujado a codigo sin assets externos</p>
     </footer>
   </main>
-
-  <div class="cine" id="cine" role="dialog" aria-modal="true" aria-label="Tráiler de Path to the Sanctuary" aria-hidden="true">
-    <div class="cine__marco">
-      <video src="assets/video/trailer.mp4" controls playsinline preload="none"></video>
-      <button class="mando cine__cerrar" type="button" data-cerrar-trailer aria-label="Cerrar el tráiler">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button>
-    </div>
-  </div>
 
   <script src="js/config.js"></script>
   <script src="js/fondo.js"></script>

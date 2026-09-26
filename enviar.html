@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aportar · Path to the Sanctuary</title>
+  <meta name="description" content="Propón una idea o avisa de un error en Path to the Sanctuary.">
+  <meta name="theme-color" content="#160d1c">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="assets/img/icono.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/fuente.css">
+  <link rel="stylesheet" href="css/comun.css">
+  <link rel="stylesheet" href="css/tablon.css">
+</head>
+<body>
+
+  <div class="fondo fondo--hondo" aria-hidden="true">
+    <video class="fondo__video" src="assets/video/fondo.mp4" autoplay muted loop playsinline preload="auto"></video>
+    <div class="fondo__velo"></div>
+    <div class="fondo__vineta"></div>
+    <canvas class="fondo__petalos"></canvas>
+  </div>
+
+  <header class="barra">
+    <a class="boton boton--callado boton--chico" href="tablon.html"><span>VOLVER</span></a>
+  </header>
+
+  <button class="mando mando--pausa" type="button" data-pausa-fondo aria-label="Pausar el vídeo de fondo"></button>
+
+  <main class="buzon">
+    <div class="rotulo buzon__rotulo">
+      <p class="rotulo__kanji aparece" lang="ja"><span>投函</span></p>
+      <h1 class="aparece aparece--2"><span class="titular">APORTAR</span></h1>
+      <p class="lema aparece aparece--3">Cuanto mas claro lo cuentes, antes llega a la senda.</p>
+    </div>
+
+    <form class="tablilla formulario aparece aparece--4" id="formulario" novalidate>
+      <fieldset class="tipos">
+        <legend class="etiqueta">¿QUE QUIERES CONTAR?</legend>
+        <label class="eleccion">
+          <input type="radio" name="tipo" value="idea" checked>
+          <strong>UNA IDEA</strong>
+          <span>Algo que te gustaria ver en el juego</span>
+        </label>
+        <label class="eleccion">
+          <input type="radio" name="tipo" value="error">
+          <strong>UN ERROR</strong>
+          <span>Algo que no funciona como deberia</span>
+        </label>
+      </fieldset>
+
+      <div class="formulario__columna">
+        <div class="campo">
+          <div class="campo__cabeza">
+            <label class="etiqueta" for="titulo">TITULO</label>
+            <span class="campo__cuenta" data-cuenta="titulo"></span>
+          </div>
+          <input class="control" id="titulo" name="titulo" type="text" maxlength="120" autocomplete="off" required>
+        </div>
+
+        <div class="parecidos" id="parecidos" hidden>
+          <p>¿Ya esta en el tablon? Si es alguno de estos, votalo alli en vez de repetirlo.</p>
+          <ul></ul>
+        </div>
+
+        <div class="campo campo--crece">
+          <div class="campo__cabeza">
+            <label class="etiqueta" for="descripcion">DESCRIPCION</label>
+            <span class="campo__cuenta" data-cuenta="descripcion"></span>
+          </div>
+          <textarea class="control" id="descripcion" name="descripcion" rows="5" maxlength="4000" required></textarea>
+        </div>
+      </div>
+
+      <div class="formulario__columna">
+        <div class="campo" data-solo-error hidden>
+          <div class="campo__cabeza">
+            <label class="etiqueta" for="pasos">COMO REPETIRLO <span class="opcional">(opcional)</span></label>
+            <span class="campo__cuenta" data-cuenta="pasos"></span>
+          </div>
+          <textarea class="control control--bajo" id="pasos" name="pasos" rows="3" maxlength="3000"></textarea>
+        </div>
+
+        <div class="pareja" data-solo-error hidden>
+          <div class="campo">
+            <label class="etiqueta" for="version">VERSION DEL JUEGO</label>
+            <input class="control" id="version" name="version" type="text" maxlength="30" list="versiones" autocomplete="off">
+            <datalist id="versiones"></datalist>
+          </div>
+          <div class="campo">
+            <label class="etiqueta" for="plataforma">PLATAFORMA</label>
+            <select class="control" id="plataforma" name="plataforma">
+              <option value="">SIN DECIR</option>
+              <option>Windows</option>
+              <option>Linux</option>
+              <option>Steam Deck</option>
+              <option>macOS</option>
+              <option>Otra</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="campo">
+          <div class="campo__cabeza">
+            <span class="etiqueta" id="archivos-etiqueta">ARCHIVOS <span class="opcional">(opcional)</span></span>
+            <span class="campo__cuenta" id="archivos-cuenta"></span>
+          </div>
+          <input id="archivos" type="file" multiple hidden
+            accept="image/png,image/jpeg,image/webp,image/gif,video/mp4,video/webm,text/plain,.log,.txt">
+          <ul class="ranuras" id="ranuras" aria-labelledby="archivos-etiqueta"></ul>
+          <p class="campo__ayuda">Capturas, videos o registros (.log), de 10 MB como mucho. Tambien puedes arrastrarlos aqui o pegar una captura.</p>
+        </div>
+      </div>
+
+      <!-- trampa para robots: una persona no la ve ni la rellena -->
+      <div class="trampa" aria-hidden="true">
+        <label for="web">No rellenes esto</label>
+        <input id="web" name="web" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <p class="aviso" id="aviso" role="alert" hidden></p>
+
+      <div class="formulario__enviar">
+        <button class="boton boton--principal" type="submit">
+          <i class="boton__doble" aria-hidden="true"></i>
+          <span>ENVIAR IDEA</span>
+        </button>
+        <p class="campo__ayuda">Lo que envies se publica en el tablon y cualquiera puede verlo, archivos incluidos. No pongas datos personales.</p>
+      </div>
+    </form>
+
+    <div class="tablilla hecho" id="hecho" tabindex="-1" hidden>
+      <p class="rotulo__kanji" lang="ja"><span>感謝</span></p>
+      <h2>RECIBIDO</h2>
+      <p class="hecho__codigo" id="hecho-codigo"></p>
+      <p class="hecho__texto">Ya esta en el tablon. Cuantos mas votos tenga, antes se mira.</p>
+      <div class="hecho__botones">
+        <a class="boton boton--chico" id="hecho-ver" href="tablon.html"><span>VER EN EL TABLON</span></a>
+        <button class="boton boton--callado boton--chico" type="button" id="hecho-otro"><span>ENVIAR OTRO</span></button>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/fondo.js"></script>
+  <script src="js/aportes.js"></script>
+  <script src="js/enviar.js"></script>
+</body>
+</html>

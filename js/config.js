@@ -10,5 +10,11 @@ window.SENDA = {
     url: "https://tllzmxkocgawznjvhwfu.supabase.co",
     clave: "sb_publishable_UVA6pbD3WHIX68k_FO3aEg_YmIQg_TL",
     tabla: "actualizaciones",
+    // el tablón: una tabla para las ideas y otra para los errores
+    // (se crean con supabase/aportes.sql)
+    ideas: "ideas",
+    errores: "errores",
+    // y el bucket de Storage donde van sus capturas, vídeos y registros
+    adjuntos: "adjuntos",
   },
 };

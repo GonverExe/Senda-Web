@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tablón · Path to the Sanctuary</title>
+  <meta name="description" content="Ideas y errores de Path to the Sanctuary: propón lo que te gustaría ver, avisa de lo que falla y vota lo que más importa.">
+  <meta name="theme-color" content="#160d1c">
+  <link rel="icon" href="assets/img/icono.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/fuente.css">
+  <link rel="stylesheet" href="css/comun.css">
+  <link rel="stylesheet" href="css/tablon.css">
+</head>
+<body>
+
+  <div class="fondo fondo--hondo" aria-hidden="true">
+    <video class="fondo__video" src="assets/video/fondo.mp4" autoplay muted loop playsinline preload="auto"></video>
+    <div class="fondo__velo"></div>
+    <div class="fondo__vineta"></div>
+    <canvas class="fondo__petalos"></canvas>
+  </div>
+
+  <header class="barra">
+    <a class="boton boton--callado boton--chico" href="index.html"><span>VOLVER</span></a>
+  </header>
+
+  <button class="mando mando--pausa" type="button" data-pausa-fondo aria-label="Pausar el vídeo de fondo"></button>
+
+  <main class="tablon">
+    <div class="rotulo tablon__rotulo">
+      <p class="rotulo__kanji aparece" lang="ja"><span>意見箱</span></p>
+      <h1 class="aparece aparece--2"><span class="titular">TABLON</span></h1>
+      <p class="lema aparece aparece--3">Ideas para la senda y errores encontrados por el camino. Vota lo que quieras ver antes.</p>
+    </div>
+
+    <nav class="aportar aparece aparece--4" aria-label="Aportar">
+      <a class="boton boton--principal" href="enviar.html" data-aportar>
+        <i class="boton__doble" aria-hidden="true"></i>
+        <span>aportar</span>
+      </a>
+    </nav>
+
+    <section class="aparece aparece--4" aria-label="Ideas y errores enviados">
+      <div class="filtros">
+        <div class="pestanas" role="group" aria-label="Tipo">
+          <button class="pestana" type="button" data-tipo="todo" aria-pressed="true">TODO</button>
+          <button class="pestana" type="button" data-tipo="idea" aria-pressed="false">IDEAS</button>
+          <button class="pestana" type="button" data-tipo="error" aria-pressed="false">ERRORES</button>
+        </div>
+        <input class="control filtros__buscar" id="buscar" type="search" placeholder="Buscar" aria-label="Buscar" autocomplete="off">
+        <select class="control" id="orden" aria-label="Orden">
+          <option value="votos">MAS VOTADOS</option>
+          <option value="nuevos">RECIENTES</option>
+        </select>
+      </div>
+
+      <p class="cuenta" id="cuenta" aria-live="polite"></p>
+      <div id="estado" aria-live="polite"></div>
+      <ol class="aportes" id="lista"></ol>
+    </section>
+
+    <div class="tablon__pie">
+      <a class="boton boton--chico" href="index.html"><span>VOLVER AL INICIO</span></a>
+    </div>
+  </main>
+
+  <div class="detalle" id="detalle" role="dialog" aria-modal="true" aria-labelledby="detalle-titulo" hidden>
+    <div class="detalle__marco">
+      <button class="mando detalle__cerrar" type="button" data-cerrar aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <article class="tablilla detalle__tablilla">
+        <div class="detalle__texto"></div>
+      </article>
+    </div>
+  </div>
+
+  <p class="brindis" id="brindis" role="status" hidden></p>
+
+  <script src="js/config.js"></script>
+  <script src="js/fondo.js"></script>
+  <script src="js/aportes.js"></script>
+  <script src="js/tablon.js"></script>
+</body>
+</html>

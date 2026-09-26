@@ -1,19 +1,5 @@
 /* actualizaciones.css - estilos del historial de actualizaciones */
 
-/* ---------- Cabecera ---------- */
-
-.barra {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 20;
-  display: flex;
-  justify-content: flex-end;
-  padding: 14px clamp(16px, 3vw, 32px);
-  pointer-events: none;
-}
-
-.barra > * { pointer-events: auto; }
-
 /* ---------- Página ---------- */
 
 .bitacora {
@@ -64,30 +50,7 @@
 
 .entrada:first-child::before { background: var(--oro-vivo); box-shadow: 0 0 0 4px var(--noche), 0 0 16px rgba(255, 199, 92, .9); }
 
-/* ---------- Tablilla ---------- */
-
-.tablilla {
-  --c: 16px;
-  position: relative;
-  padding: 24px clamp(18px, 4vw, 34px) 26px;
-  background: linear-gradient(to bottom, rgba(58, 29, 48, .94), rgba(36, 17, 31, .94));
-  clip-path: polygon(var(--c) 0, 100% 0, 100% calc(100% - var(--c)), calc(100% - var(--c)) 100%, 0 100%, 0 var(--c));
-}
-
-/* el filete dorado */
-.tablilla::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: rgba(255, 198, 92, .63);
-  clip-path: polygon(evenodd,
-    var(--c) 0, 100% 0, 100% calc(100% - var(--c)), calc(100% - var(--c)) 100%,
-    0 100%, 0 var(--c), var(--c) 0,
-    calc(var(--c) + .83px) 2px, 2px calc(var(--c) + .83px), 2px calc(100% - 2px),
-    calc(100% - var(--c) - .83px) calc(100% - 2px), calc(100% - 2px) calc(100% - var(--c) - .83px),
-    calc(100% - 2px) 2px, calc(var(--c) + .83px) 2px);
-}
+/* ---------- Tablilla (la base está en comun.css) ---------- */
 
 .entrada:first-child .tablilla::after { background: rgba(255, 215, 132, .9); }
 
@@ -130,12 +93,6 @@
   line-height: 1.25;
   color: var(--titular);
   text-shadow: .05em .07em 0 rgba(193, 48, 31, .85);
-}
-
-.raya {
-  height: 1px;
-  margin: 16px 0 16px;
-  background: linear-gradient(to right, rgba(255, 198, 92, .75), rgba(255, 198, 92, 0) 80%);
 }
 
 /* ---------- Hito: versión importante ---------- */
@@ -309,30 +266,6 @@
 
 .vitrina:hover::after,
 .vitrina:focus-visible::after { box-shadow: inset 0 0 0 2px var(--oro-vivo); }
-
-/* ---------- Farol: cargando o sin entradas ---------- */
-
-.farol {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  padding: 56px 16px;
-  text-align: center;
-  color: rgba(251, 238, 226, .85);
-  letter-spacing: .12em;
-}
-
-.farol__luz {
-  width: 34px;
-  height: 46px;
-  border-radius: 45% 45% 40% 40%;
-  background: radial-gradient(ellipse at 50% 55%, #fff0c4, #ffcf72 45%, #c8402f 100%);
-  box-shadow: 0 0 30px 8px rgba(255, 207, 114, .45);
-  animation: latir 1.6s ease-in-out infinite;
-}
-
-@keyframes latir { 50% { box-shadow: 0 0 44px 14px rgba(255, 207, 114, .7); transform: scale(1.05); } }
 
 /* ---------- Ficha: ventana con una actualización entera ---------- */
 

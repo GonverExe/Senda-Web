@@ -54,10 +54,15 @@
 
   // ---------- Piezas ----------
 
+  // la fuente de Senda no tiene letras con tilde ni ñ: "canción" -> "cancion"
+  function sinTildes(texto) {
+    return String(texto).normalize("NFD").replace(/[̀-ͯ]/g, "");
+  }
+
   function el(etiqueta, clase, texto) {
     const nodo = document.createElement(etiqueta);
     if (clase) nodo.className = clase;
-    if (texto != null) nodo.textContent = texto;
+    if (texto != null) nodo.textContent = sinTildes(texto);
     return nodo;
   }
 
@@ -66,7 +71,7 @@
     texto.split(/(\*\*[^*]+\*\*)/g).forEach((trozo) => {
       if (!trozo) return;
       if (/^\*\*[^*]+\*\*$/.test(trozo)) padre.appendChild(el("strong", null, trozo.slice(2, -2)));
-      else padre.appendChild(document.createTextNode(trozo));
+      else padre.appendChild(document.createTextNode(sinTildes(trozo)));
     });
   }
 
@@ -114,7 +119,7 @@
       hora.dateTime = String(fila.fecha).slice(0, 10);
       cabeza.appendChild(hora);
     }
-    if (primera) cabeza.appendChild(el("span", "nueva", "◆ ÚLTIMA"));
+    if (primera) cabeza.appendChild(el("span", "nueva", "◆ ULTIMA"));
     return cabeza;
   }
 
@@ -145,14 +150,14 @@
     art.appendChild(h2);
 
     if (!String(fila.descripcion || "").trim() && !imagenesDe(fila).length) {
-      h2.textContent = titulo || "Sin título";
+      h2.textContent = sinTildes(titulo) || "Sin titulo";
       return li;
     }
 
     // con contenido: un clic en cualquier parte abre la ficha
     art.appendChild(el("div", "raya"));
     art.classList.add("tablilla--abre");
-    const boton = el("button", "tablilla__boton", titulo || "Sin título");
+    const boton = el("button", "tablilla__boton", titulo || "Sin titulo");
     boton.type = "button";
     boton.setAttribute("aria-haspopup", "dialog");
     h2.appendChild(boton);
@@ -186,14 +191,14 @@
       // de la más nueva a la más antigua; a igual fecha, por versión
       filas.sort((a, b) => String(b.fecha || "").localeCompare(String(a.fecha || "")) || String(b.version || "").localeCompare(String(a.version || ""), "es", { numeric: true }));
       if (!filas.length) {
-        farol("Todavía no hay nada escrito en la bitácora.");
+        farol("Todavia no hay nada escrito en la bitacora.");
         return;
       }
       estado.hidden = true;
       filas.forEach((f, i) => lista.appendChild(entrada(f, i === 0)));
     } catch (error) {
       console.error(error);
-      farol("No se ha podido leer la bitácora. Comprueba la conexión.", true);
+      farol("No se ha podido leer la bitacora. Comprueba la conexion.", true);
     }
   }
 
@@ -220,7 +225,7 @@
     function pintar() {
       img.src = fotos[i];
       img.alt = `${titulo}, imagen ${i + 1} de ${fotos.length}`;
-      pie.textContent = fotos.length > 1 ? `${titulo} · ${i + 1} / ${fotos.length}` : titulo;
+      pie.textContent = sinTildes(fotos.length > 1 ? `${titulo} · ${i + 1} / ${fotos.length}` : titulo);
       antes.hidden = despues.hidden = fotos.length < 2;
     }
 
@@ -305,7 +310,7 @@
 
     return {
       abrir(fila, primera, boton) {
-        const titulo = String(fila.titulo || "").trim() || "Sin título";
+        const titulo = String(fila.titulo || "").trim() || "Sin titulo";
         const hito = esHito(fila);
         const imagenes = imagenesDe(fila);
         volver = boton;
