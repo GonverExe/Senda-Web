@@ -215,7 +215,7 @@
     ul.replaceChildren(...hallados.map(({ a }) => {
       const li = el("li");
       const enlace = el("a");
-      enlace.href = `tablon.html#${A.codigo(a)}`;
+      enlace.href = `/tablon#${A.codigo(a)}`;
       enlace.target = "_blank";
       enlace.rel = "noopener";
       enlace.appendChild(el("span", "codigo", A.codigo(a)));
@@ -324,7 +324,7 @@
   function terminar(aporte) {
     const codigo = aporte ? A.codigo(aporte) : "";
     document.getElementById("hecho-codigo").textContent = codigo;
-    document.getElementById("hecho-ver").href = codigo ? `tablon.html#${codigo}` : "tablon.html";
+    document.getElementById("hecho-ver").href = codigo ? `/tablon#${codigo}` : "/tablon";
     form.hidden = true;
     hecho.hidden = false;
     hecho.focus();

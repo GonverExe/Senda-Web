@@ -45,7 +45,7 @@
   function pintar() {
     pestanas.forEach((p) => p.setAttribute("aria-pressed", String(p.dataset.tipo === tipo)));
     // desde la pestaña de errores, el formulario llega con "un error" ya elegido
-    if (aportar) aportar.href = tipo === "error" ? "enviar.html?tipo=error" : "enviar.html";
+    if (aportar) aportar.href = tipo === "error" ? "/enviar?tipo=error" : "/enviar";
     const vistos = todos.filter(pasa).sort(ORDENES[orden.value] || ORDENES.votos);
     lista.replaceChildren(...vistos.map(tarjeta));
     cuenta.textContent = todos.length ? `${vistos.length} DE ${todos.length}` : "";
